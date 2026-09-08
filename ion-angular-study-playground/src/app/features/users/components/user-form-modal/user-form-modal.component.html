@@ -1,0 +1,65 @@
+<form class="user-form" [formGroup]="form" (ngSubmit)="submit()" novalidate>
+  <p class="form-intro">Preencha os dados abaixo. A criação é simulada pela API JSONPlaceholder.</p>
+
+  <div class="field">
+    <label for="new-user-name">Nome</label>
+    <ion-input
+      id="new-user-name"
+      placeholder="Ex.: Maria Souza"
+      inputType="text"
+      [value]="form.get('name').value"
+      [invalid]="isInvalid('name')"
+      [valid]="form.get('name').valid && form.get('name').touched"
+      [errorMsg]="getErrorMessage('name')"
+      (valueChange)="setTextValue('name', $event)"
+    ></ion-input>
+  </div>
+
+  <div class="field">
+    <label for="new-user-email">E-mail</label>
+    <ion-input
+      id="new-user-email"
+      placeholder="maria@exemplo.com"
+      inputType="email"
+      [value]="form.get('email').value"
+      [invalid]="isInvalid('email')"
+      [valid]="form.get('email').valid && form.get('email').touched"
+      [errorMsg]="getErrorMessage('email')"
+      (valueChange)="setTextValue('email', $event)"
+    ></ion-input>
+  </div>
+
+  <div class="field">
+    <label>Área de atuação</label>
+    <ion-select
+      placeholder="Selecione uma área"
+      [options]="departments"
+      [required]="true"
+      (events)="setDepartment($event)"
+    ></ion-select>
+    <p class="field-error" *ngIf="isInvalid('department')">Selecione uma área para continuar.</p>
+  </div>
+
+  <div class="invite-choice">
+    <ion-checkbox
+      value="send-invite"
+      label="Enviar convite por e-mail"
+      [state]="form.get('sendInvite').value ? 'checked' : 'enabled'"
+      (ionClick)="setInvite($event)"
+    ></ion-checkbox>
+    <p>O convite é apenas demonstrativo; a API não envia e-mails reais.</p>
+  </div>
+
+  <ion-message *ngIf="submitError" [label]="submitError" type="negative_erro"></ion-message>
+
+  <div class="form-actions">
+    <ion-button label="Cancelar" type="ghost" (ionOnClick)="cancel()"></ion-button>
+    <ion-button
+      label="Salvar usuário"
+      iconType="check"
+      [loading]="saving"
+      [disabled]="saving"
+      (ionOnClick)="submit()"
+    ></ion-button>
+  </div>
+</form>

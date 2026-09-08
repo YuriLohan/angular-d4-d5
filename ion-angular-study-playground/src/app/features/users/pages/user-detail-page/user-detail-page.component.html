@@ -1,0 +1,49 @@
+<ion-button label="Voltar para usuários" type="ghost" iconType="arrow-left" (ionOnClick)="backToUsers()"></ion-button>
+
+<section class="feedback-panel" *ngIf="loading">
+  <ion-spinner text="Carregando perfil..." [size]="32"></ion-spinner>
+</section>
+
+<section class="feedback-panel error" *ngIf="!loading && errorMessage">
+  <ion-message [label]="errorMessage" type="negative_erro"></ion-message>
+  <ion-button label="Tentar novamente" type="secondary" (ionOnClick)="loadUser()"></ion-button>
+</section>
+
+<section class="profile" *ngIf="!loading && user">
+  <div class="profile-hero">
+    <div class="avatar" aria-hidden="true">{{ user.name.charAt(0) }}</div>
+    <div>
+      <p class="eyebrow">Usuário #{{ user.id }}</p>
+      <h1>{{ user.name }}</h1>
+      <p>@{{ user.username }}</p>
+    </div>
+    <ion-button label="Ver publicações" iconType="file" (ionOnClick)="openPosts()"></ion-button>
+  </div>
+
+  <div class="details-grid">
+    <article>
+      <h2>Contato</h2>
+      <dl>
+        <div><dt>E-mail</dt><dd><a [href]="'mailto:' + user.email">{{ user.email }}</a></dd></div>
+        <div><dt>Telefone</dt><dd>{{ user.phone || 'Não informado' }}</dd></div>
+        <div><dt>Website</dt><dd>{{ user.website || 'Não informado' }}</dd></div>
+      </dl>
+    </article>
+    <article>
+      <h2>Organização</h2>
+      <dl>
+        <div><dt>Empresa</dt><dd>{{ user.company?.name || 'Não informada' }}</dd></div>
+        <div><dt>Frase</dt><dd>{{ user.company?.catchPhrase || 'Não informada' }}</dd></div>
+        <div><dt>Área</dt><dd>{{ user.department || 'Não informada' }}</dd></div>
+      </dl>
+    </article>
+    <article>
+      <h2>Endereço</h2>
+      <dl>
+        <div><dt>Rua</dt><dd>{{ user.address?.street || 'Não informada' }} {{ user.address?.suite }}</dd></div>
+        <div><dt>Cidade</dt><dd>{{ user.address?.city || 'Não informada' }}</dd></div>
+        <div><dt>CEP</dt><dd>{{ user.address?.zipcode || 'Não informado' }}</dd></div>
+      </dl>
+    </article>
+  </div>
+</section>

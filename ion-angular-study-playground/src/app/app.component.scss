@@ -1,0 +1,40 @@
+.app-header {
+  align-items: center;
+  background: #fff;
+  border-bottom: 1px solid #e8ebf0;
+  display: flex;
+  justify-content: space-between;
+  min-height: 64px;
+  padding: 0 7vw;
+}
+
+.brand {
+  align-items: center;
+  color: #202633;
+  display: flex;
+  font-size: 1.05rem;
+  font-weight: 500;
+  gap: .6rem;
+  text-decoration: none;
+}
+
+.brand-mark {
+  align-items: center;
+  background: #0067d8;
+  border-radius: 8px;
+  color: #fff;
+  display: inline-flex;
+  font-weight: 700;
+  height: 28px;
+  justify-content: center;
+  width: 28px;
+}
+
+.header-caption { color: #677184; font-size: .82rem; }
+.app-content { margin: 0 auto; max-width: 1240px; padding: 2.5rem 7vw 4rem; }
+
+@media (max-width: 600px) {
+  .app-header { padding: 0 1.25rem; }
+  .app-content { padding: 1.5rem 1rem 3rem; }
+  .header-caption { display: none; }
+}

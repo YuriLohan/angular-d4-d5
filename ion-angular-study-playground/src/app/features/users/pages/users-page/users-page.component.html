@@ -1,0 +1,62 @@
+<section class="page-heading">
+  <div>
+    <p class="eyebrow">Estudo prático · Dia 4 e 5</p>
+    <h1>Usuários</h1>
+    <p class="intro">Consulte, detalhe, adicione e exclua usuários usando o Ion e a API JSONPlaceholder.</p>
+  </div>
+  <ion-button
+    label="Adicionar usuário"
+    iconType="plus"
+    (ionOnClick)="openCreateModal()"
+  ></ion-button>
+</section>
+
+<section class="feedback-panel" *ngIf="loading">
+  <ion-spinner text="Carregando usuários..." [size]="32"></ion-spinner>
+</section>
+
+<section class="feedback-panel error" *ngIf="!loading && errorMessage">
+  <ion-message [label]="errorMessage" type="negative_erro"></ion-message>
+  <ion-button label="Tentar novamente" type="secondary" (ionOnClick)="loadUsers()"></ion-button>
+</section>
+
+<section class="feedback-panel" *ngIf="!loading && !errorMessage && users.length === 0">
+  <ion-no-data label="Nenhum usuário disponível."></ion-no-data>
+</section>
+
+<section class="users-grid" *ngIf="!loading && !errorMessage && users.length">
+  <article class="user-card" *ngFor="let user of users; trackBy: trackByUserId">
+    <div class="avatar" aria-hidden="true">{{ user.name.charAt(0) }}</div>
+    <div class="user-copy">
+      <h2>{{ user.name }}</h2>
+      <p class="username">@{{ user.username }}</p>
+      <a [href]="'mailto:' + user.email">{{ user.email }}</a>
+      <p class="company">{{ user.company?.name || user.department || 'Sem empresa informada' }}</p>
+    </div>
+    <div class="card-actions" aria-label="Ações de {{ user.name }}">
+      <ion-button
+        label="Detalhes"
+        type="ghost"
+        iconType="eye"
+        ionTooltip
+        ionTooltipTitle="Ver detalhes e publicações"
+        (ionOnClick)="goToUser(user.id)"
+      ></ion-button>
+      <ion-button
+        label="Excluir"
+        [danger]="true"
+        type="ghost"
+        iconType="trash"
+        [loading]="deletingId === user.id"
+        ionTooltip
+        ionTooltipTitle="Excluir usuário"
+        ionPopConfirm
+        ionPopConfirmTitle="Excluir {{ user.name }}?"
+        ionPopConfirmDesc="Esta ação remove o usuário apenas desta lista de estudo."
+        ionConfirmText="Excluir"
+        ionCancelText="Cancelar"
+        (ionOnConfirm)="deleteUser(user)"
+      ></ion-button>
+    </div>
+  </article>
+</section>

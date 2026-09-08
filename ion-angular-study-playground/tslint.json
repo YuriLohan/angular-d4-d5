@@ -1,0 +1,10 @@
+{
+  "extends": ["tslint:recommended"],
+  "rules": {
+    "component-class-suffix": true,
+    "directive-class-suffix": true,
+    "max-line-length": [true, 120],
+    "quotemark": [true, "single"],
+    "semicolon": [true, "always"]
+  }
+}

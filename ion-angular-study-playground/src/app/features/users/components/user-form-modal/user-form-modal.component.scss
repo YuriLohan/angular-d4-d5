@@ -1,0 +1,8 @@
+.user-form { display: flex; flex-direction: column; gap: 1.15rem; padding: .25rem; }
+.form-intro { color: #687387; font-size: .9rem; line-height: 1.5; margin: 0; }
+.field { display: flex; flex-direction: column; gap: .45rem; }
+.field label { color: #303847; font-size: .9rem; font-weight: 600; }
+.field-error { color: #c82b39; font-size: .8rem; margin: -.15rem 0 0; }
+.invite-choice { background: #f6f8fc; border-radius: 8px; padding: .9rem; }
+.invite-choice p { color: #6a7486; font-size: .78rem; line-height: 1.4; margin: .45rem 0 0; }
+.form-actions { display: flex; gap: .65rem; justify-content: flex-end; margin-top: .3rem; }

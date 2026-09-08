@@ -1,0 +1,28 @@
+<ion-button label="Voltar ao perfil" type="ghost" iconType="arrow-left" (ionOnClick)="backToUser()"></ion-button>
+
+<section class="page-heading">
+  <p class="eyebrow">/users/{{ userId }}/posts</p>
+  <h1>Publicações do usuário</h1>
+  <p>Dados obtidos diretamente da rota aninhada da API JSONPlaceholder.</p>
+</section>
+
+<section class="feedback-panel" *ngIf="loading">
+  <ion-spinner text="Carregando publicações..." [size]="32"></ion-spinner>
+</section>
+
+<section class="feedback-panel error" *ngIf="!loading && errorMessage">
+  <ion-message [label]="errorMessage" type="negative_erro"></ion-message>
+  <ion-button label="Tentar novamente" type="secondary" (ionOnClick)="loadPosts()"></ion-button>
+</section>
+
+<section class="feedback-panel" *ngIf="!loading && !errorMessage && posts.length === 0">
+  <ion-no-data label="Este usuário ainda não possui publicações."></ion-no-data>
+</section>
+
+<section class="post-list" *ngIf="!loading && !errorMessage && posts.length">
+  <article *ngFor="let post of posts; trackBy: trackByPostId">
+    <span>Post #{{ post.id }}</span>
+    <h2>{{ post.title }}</h2>
+    <p>{{ post.body }}</p>
+  </article>
+</section>
